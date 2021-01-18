@@ -20,13 +20,17 @@ public class Cuenta {
         return estadoCuenta;
     }
 
-    public void ingresar(double dinero){
+    public boolean ingresar(double dinero){
+
+        boolean operacionRealizada = false;
 
         if (dinero > 0) {
             this.saldo += dinero;
+            operacionRealizada = true;
         }
         System.out.println(toString());
 
+        return operacionRealizada;
     }
 
 

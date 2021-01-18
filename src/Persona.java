@@ -1,7 +1,8 @@
 public class Persona {
     private String nombre, apellidos;
     private int edad;
-    char sexo;
+    private char sexo;
+    Cuenta cuentaCorriente;
 
     public Persona() {
 
@@ -9,6 +10,7 @@ public class Persona {
         this.nombre = "none";
         this.edad = 0;
         this.sexo= 'F';
+        this.cuentaCorriente = null;
     }
 
     public Persona(String nombre, String apellidos, int edad, char sexo) {
@@ -16,7 +18,69 @@ public class Persona {
         this.apellidos = apellidos;
         this.edad = edad;
         this.sexo = sexo;
+        this.cuentaCorriente = null;
     }
+
+    public boolean crearCuentaBancaria(String iban, int nc, double interesMensual){
+
+        boolean accionRealizada = false;
+
+        if (cuentaCorriente == null) {
+            cuentaCorriente = new Cuenta(iban, nc, interesMensual);
+        }
+
+        return accionRealizada;
+
+    }
+
+    public boolean sacarDinero(double dinero) {
+        boolean operacionRealizada = false;
+
+        if (cuentaCorriente.retirar(dinero)) {
+            operacionRealizada = true;
+        }
+
+        return operacionRealizada;
+    }
+
+    public boolean ingresarDinero(double dinero){
+
+        boolean operacionRealizada = false;
+
+        if (cuentaCorriente.ingresar(dinero)){
+
+            operacionRealizada = true;
+
+        }
+        return operacionRealizada;
+
+    }
+
+
+
+    public double hacerTransferecia(Persona p, double cantidad){
+
+        boolean operacionRealizada = false;
+
+
+        if (!cuentaCorriente.hacerTransferencia(p.cuentaCorriente, cantidad)){
+
+            cantidad = 0;
+
+        }
+
+        return cantidad;
+
+    }
+
+    public void cerrarCuenta(){
+
+
+        cuentaCorriente = null;
+
+
+    }
+
 
 
 
